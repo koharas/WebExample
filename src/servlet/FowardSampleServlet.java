@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HelloServlet
+ * Servlet implementation class FowardSampleServlet
  */
-@WebServlet("/hello")
-public class HelloServlet extends HttpServlet {
+@WebServlet("/foward")
+public class FowardSampleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloServlet() {
+    public FowardSampleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,8 @@ public class HelloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/hello.jsp");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fowardSample.jsp");
 		dispatcher.forward(request, response);
 	}
 

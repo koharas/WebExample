@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,17 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Uriage;
+import model.UriageDAO;
+
 /**
- * Servlet implementation class HelloServlet
+ * Servlet implementation class UriageListServlet
  */
-@WebServlet("/hello")
-public class HelloServlet extends HttpServlet {
+@WebServlet("/ulist")
+public class UriageListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloServlet() {
+    public UriageListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +32,12 @@ public class HelloServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/hello.jsp");
+		UriageDAO dao = new UriageDAO();
+		ArrayList<Uriage> ulist = dao.findAll();
+
+		request.setAttribute("list", ulist);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ulist.jsp");
 		dispatcher.forward(request, response);
 	}
 

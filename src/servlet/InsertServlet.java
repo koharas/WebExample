@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,18 +46,12 @@ public class InsertServlet extends HttpServlet {
 		Shouhin s1 = new Shouhin(0, sname,tanka);
 		dao.insert(s1);
 
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		response.sendRedirect("slist");
 
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<title>追加</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<p>追加しました</p>");
-		out.println("<a href=\"slist\">商品一覧</a>");
-		out.println("</body>");
-		out.println("</html>");
+//		request.setAttribute("shouhin", s1);
+//
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/insert.jsp");
+//		dispatcher.forward(request, response);
 	}
 
 }
