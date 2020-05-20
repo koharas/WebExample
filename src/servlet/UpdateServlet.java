@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.Sankaku;
+import model.Shouhin;
+import model.ShouhinDAO;
 
 /**
- * Servlet implementation class SankakuServlet
+ * Servlet implementation class UpdateServlet
  */
-@WebServlet("/sankaku")
-public class SankakuServlet extends HttpServlet {
+@WebServlet("/update")
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SankakuServlet() {
+    public UpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,16 @@ public class SankakuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String teihenStr = request.getParameter("teihen");
-		String takasaStr = request.getParameter("takasa");
-		int teihen = Integer.parseInt(teihenStr);
-		int takasa = Integer.parseInt(takasaStr);
+		request.setCharacterEncoding("UTF-8");
+		String sidStr = request.getParameter("sid");
+		int sid = Integer.parseInt(sidStr);
 
-		Sankaku s = new Sankaku(teihen,takasa);
+		ShouhinDAO dao = new ShouhinDAO();
+		Shouhin s = dao.findBySid(sid);
 
-		//request.setAttribute("sankaku", s);
-		HttpSession session = request.getSession();
-		session.setAttribute("sankaku", s);
+		request.setAttribute("shouhin", s);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/sankaku.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/update.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -50,8 +48,18 @@ public class SankakuServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String sidStr = request.getParameter("sid");
+		int sid = Integer.parseInt(sidStr);
+		String sname = request.getParameter("sname");
+		String tankaStr = request.getParameter("tanka");
+		int tanka = Integer.parseInt(tankaStr);
+
+		ShouhinDAO dao = new ShouhinDAO();
+		Shouhin s1 = new Shouhin(sid, sname,tanka);
+		dao.update(s1);
+
+		response.sendRedirect("slist");
 	}
 
 }

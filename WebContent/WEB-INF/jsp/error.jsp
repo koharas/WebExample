@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>三角形の面積</title>
+<title>エラー</title>
 </head>
 <body>
+<h1>エラー</h1>
 
-<p>底辺：${sankaku.teihen}</p>
-<p>高さ：${sankaku.takasa}</p>
-<p><a href="menseki">面積表示</a></p>
+<p>${mes}</p>
+
+<a href="${url}">戻る</a>
 
 </body>
 </html>

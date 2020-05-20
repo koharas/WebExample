@@ -10,6 +10,11 @@
 <body>
 <h1>売上一覧</h1>
 
+<p>ようこそ、${user.uname}さん( ${user.mail} )</p>
+
+<a href="logout">ログアウト</a>
+<a href="uinsert">追加</a>
+
 <table>
 <tr><th>売上ID</th><th>商品ID</th><th>個数</th><th>日付</th></tr>
 <c:forEach var="uriage" items="${list}">
@@ -18,6 +23,7 @@
 		<td>${uriage.sid}</td>
 		<td>${uriage.kosu}</td>
 		<td>${uriage.hi}</td>
+		<td><a href="uinfo?uid=${uriage.uid}">詳細</a></td>
 	</tr>
 </c:forEach>
 </table>

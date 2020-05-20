@@ -8,5 +8,9 @@
 </head>
 <body>
 <p>${uranai.today}の運勢は${uranai.luck}です</p>
+
+<jsp:include page="/footer.jsp" />
+<%@ include file="/common.jsp" %>
+
 </body>
 </html>

@@ -8,21 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.Sankaku;
+import model.Shouhin;
+import model.ShouhinDAO;
+import model.Uriage;
+import model.UriageDAO;
 
 /**
- * Servlet implementation class SankakuServlet
+ * Servlet implementation class UriageInfoServlet
  */
-@WebServlet("/sankaku")
-public class SankakuServlet extends HttpServlet {
+@WebServlet("/uinfo")
+public class UriageInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SankakuServlet() {
+    public UriageInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +33,22 @@ public class SankakuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String teihenStr = request.getParameter("teihen");
-		String takasaStr = request.getParameter("takasa");
-		int teihen = Integer.parseInt(teihenStr);
-		int takasa = Integer.parseInt(takasaStr);
+		// 入力を受け付ける（getParameter）
+		String uidStr = request.getParameter("uid");
+		int uid = Integer.parseInt(uidStr);
 
-		Sankaku s = new Sankaku(teihen,takasa);
+		// モデルを使った処理
+		UriageDAO dao = new UriageDAO();
+		Uriage u = dao.findByUid(uid);
 
-		//request.setAttribute("sankaku", s);
-		HttpSession session = request.getSession();
-		session.setAttribute("sankaku", s);
+		ShouhinDAO sdao = new ShouhinDAO();
+		Shouhin s = sdao.findBySid(u.getSid());
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/sankaku.jsp");
+		request.setAttribute("uriage", u);
+		request.setAttribute("shouhin", s);
+
+		// 出力（jspを表示 or 別ページにリダイレクト）
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/uinfo.jsp");
 		dispatcher.forward(request, response);
 	}
 
