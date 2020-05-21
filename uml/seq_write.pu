@@ -1,0 +1,15 @@
+@startuml
+scale 1.5
+
+actor ユーザ
+ユーザ -> InsertServlet:GET
+InsertServlet -> insert.jsp:フォワード
+insert.jsp ->ユーザ:入力フォーム表示
+ユーザ -> insert.jsp :入力
+insert.jsp -> InsertServlet:POST
+InsertServlet -> ShouhinDAO:new
+InsertServlet -> Shouhin:new
+InsertServlet -> ShouhinDAO:insert()
+InsertServlet -> slist:リダイレクト
+slist --> ユーザ:表示
+@enduml

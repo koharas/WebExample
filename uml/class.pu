@@ -1,0 +1,25 @@
+@startuml
+package model{
+	class Shouhin{
+		-sid : int
+		-sname : String
+		-tanka : int
+		Shouhin(sid,sname,tanka)
+	}
+	class ShouhinDAO{
+		+findAll()
+		+findBySid(int sid)
+		+insert(Shouhin s)
+		+update(Shouhin s)
+		+delete(int sid)
+	}
+}
+package servlet{
+	class ShouhinListServlet{
+		+doGet()
+	}
+}
+
+Shouhin -* ShouhinDAO
+ShouhinListServlet ..> ShouhinDAO
+@enduml

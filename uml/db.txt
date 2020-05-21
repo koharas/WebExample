@@ -1,0 +1,8 @@
+スキーマ名：bbs
+テーブル名：toukou
+列名：tid   投稿ID int primary key auto_increment
+      name  名前 varchar(45)
+      body  内容 text
+      wdate 日時 datetime
+
+

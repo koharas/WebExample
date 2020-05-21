@@ -1,0 +1,21 @@
+@startuml
+scale 1.5
+autonumber "#."
+
+actor ユーザ
+participant slist
+participant del.jsp
+participant DelServlet
+database ShouhinDAO
+
+ユーザ -> slist:削除リンククリック
+slist -> DelServlet:遷移
+DelServlet -> del.jsp:フォワード
+del.jsp ->ユーザ:確認画面表示
+ユーザ -> del.jsp :削除ボタン押下
+del.jsp -> DelServlet:POST
+DelServlet -> ShouhinDAO:new
+DelServlet -> ShouhinDAO:delete()
+DelServlet -> slist:リダイレクト
+slist -> ユーザ:表示
+@enduml
