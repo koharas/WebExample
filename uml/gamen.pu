@@ -1,6 +1,7 @@
 @startuml
 title ページ遷移図
-bbs : 商品一覧
+state "top/bbs"  as bbs
+bbs: 商品一覧
 bbsdel:GET 削除確認\nPOST 削除
 write:GET フォーム\nPOST 書き込み
 
